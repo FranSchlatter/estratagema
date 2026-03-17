@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ShoppingCart } from "lucide-react";
+import Link from "next/link";
 
 const navLinks = [
   { label: "Juegos", href: "#juegos" },
@@ -32,11 +33,11 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[60px] md:h-[70px]">
           {/* Logo */}
-          <a href="#" className="group flex items-center gap-2">
+          <Link href="/" className="group flex items-center gap-2">
             <span className="font-cinzel text-gold text-xl md:text-2xl font-bold tracking-[0.15em] group-hover:text-yellow-300 transition-colors duration-300">
               ESTRATAGEMA
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">

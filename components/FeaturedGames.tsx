@@ -1,58 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink, Star } from "lucide-react";
-
-const games = [
-  {
-    name: "Catan",
-    category: "Estrategia",
-    price: "$12.500",
-    color: "from-amber-900/40 to-orange-900/20",
-    rating: 4.8,
-    players: "3-4",
-  },
-  {
-    name: "Ticket to Ride",
-    category: "Familiar",
-    price: "$9.800",
-    color: "from-blue-900/40 to-cyan-900/20",
-    rating: 4.7,
-    players: "2-5",
-  },
-  {
-    name: "Pandemic",
-    category: "Cooperativo",
-    price: "$8.500",
-    color: "from-red-900/40 to-rose-900/20",
-    rating: 4.6,
-    players: "2-4",
-  },
-  {
-    name: "Terraforming Mars",
-    category: "Estrategia avanzada",
-    price: "$15.900",
-    color: "from-orange-900/40 to-red-900/20",
-    rating: 4.9,
-    players: "1-5",
-  },
-  {
-    name: "Dixit",
-    category: "Creativo",
-    price: "$7.200",
-    color: "from-purple-900/40 to-fuchsia-900/20",
-    rating: 4.5,
-    players: "3-8",
-  },
-  {
-    name: "Splendor",
-    category: "Estrategia",
-    price: "$8.900",
-    color: "from-emerald-900/40 to-teal-900/20",
-    rating: 4.6,
-    players: "2-4",
-  },
-];
+import { ExternalLink, Star, Eye } from "lucide-react";
+import Link from "next/link";
+import { games } from "@/data/games";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 50, scale: 0.95 },
@@ -96,7 +47,7 @@ export default function FeaturedGames() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {games.map((game, i) => (
             <motion.div
-              key={game.name}
+              key={game.slug}
               custom={i}
               initial="hidden"
               whileInView="visible"
@@ -128,12 +79,15 @@ export default function FeaturedGames() {
                 </div>
 
                 {/* Hover overlay */}
-                <div className="absolute inset-0 bg-navy/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                <Link
+                  href={`/juegos/${game.slug}`}
+                  className="absolute inset-0 bg-navy/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center"
+                >
                   <span className="bg-gold text-dark font-raleway font-bold px-6 py-2.5 rounded-lg text-sm transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center gap-2">
-                    <ExternalLink size={14} />
-                    Ver en tienda
+                    <Eye size={14} />
+                    Ver detalle
                   </span>
-                </div>
+                </Link>
               </div>
 
               {/* Content */}
@@ -148,9 +102,14 @@ export default function FeaturedGames() {
                   ))}
                   <span className="text-white/30 text-xs ml-1">{game.rating}</span>
                 </div>
-                <h3 className="font-raleway font-bold text-white text-lg mb-1 group-hover:text-gold transition-colors duration-300">
-                  {game.name}
-                </h3>
+                <Link href={`/juegos/${game.slug}`}>
+                  <h3 className="font-raleway font-bold text-white text-lg mb-1 group-hover:text-gold transition-colors duration-300">
+                    {game.name}
+                  </h3>
+                </Link>
+                <p className="text-white/40 text-xs font-inter mb-3 line-clamp-2">
+                  {game.description}
+                </p>
                 <div className="flex items-center justify-between mt-3">
                   <span className="font-cinzel text-gold text-2xl font-bold">
                     {game.price}

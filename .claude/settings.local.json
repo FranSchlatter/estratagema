@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"D:/Dev/Landing/EstratagemaDemo\" && npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir=false --import-alias='@/*' --use-npm 2>&1)",
+      "Bash(cd \"D:/Dev/Landing\" && npx create-next-app@latest estratagema-temp --typescript --tailwind --eslint --app --src-dir=false --import-alias='@/*' --use-npm 2>&1)",
+      "Bash(cd \"D:/Dev/Landing\" && echo \"N\" | npx create-next-app@latest estratagema-temp --typescript --tailwind --eslint --app --src-dir=false --import-alias='@/*' --use-npm 2>&1)",
+      "Bash(cd \"D:/Dev/Landing\" && printf \"N\\\\nN\\\\n\" | npx create-next-app@latest estratagema-temp --typescript --tailwind --eslint --app --import-alias='@/*' --use-npm 2>&1)",
+      "Bash(cd \"D:/Dev/Landing/EstratagemaDemo\" && mkdir -p app components public/images)",
+      "Bash(cd \"D:/Dev/Landing/EstratagemaDemo\" && npm install 2>&1)",
+      "Bash(cd \"D:/Dev/Landing/EstratagemaDemo\" && npx next build 2>&1)",
+      "Bash(cd \"D:/Dev/Landing/EstratagemaDemo\" && npm install -D autoprefixer 2>&1)",
+      "WebFetch(domain:estratagema.com.ar)",
+      "WebSearch",
+      "WebFetch(domain:linktr.ee)",
+      "Bash(cd \"D:/Dev/Landing/EstratagemaDemo\" && rm -rf .next && npx next build 2>&1)",
+      "Bash(cd \"D:/Dev/Landing/EstratagemaDemo\" && npx tsc --noEmit 2>&1)",
+      "Bash(cd \"D:/Dev/Landing/EstratagemaDemo\" && timeout 30 npx next dev --port 3456 2>&1 || true)",
+      "Bash(gh repo create estratagema-demo --private --description \"Landing page demo para Estratagema - tienda de juegos de mesa \\(Santa Fe, Argentina\\)\" --source \"D:/Dev/Landing/EstratagemaDemo\" --push 2>&1)",
+      "Bash(find D:/Dev/Landing/EstratagemaDemo -type f \\\\\\(-name *.json -o -name *.tsx -o -name *.ts -o -name *.jsx -o -name *.js \\\\\\))",
+      "Bash(find D:/Dev/Landing/EstratagemaDemo -maxdepth 1 -type f \\\\\\(-name *.json -o -name *.config.* \\\\\\))",
+      "Bash(npx next:*)"
+    ]
+  }
+}
