@@ -42,7 +42,7 @@ const cardVariants = {
 
 export default function WhyUs() {
   return (
-    <section id="nosotros" className="relative bg-dark py-24 md:py-32 overflow-hidden">
+    <section className="relative bg-dark py-24 md:py-32 overflow-hidden">
       {/* Background decoration */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-navy/8 rounded-full blur-[200px] pointer-events-none" />
 

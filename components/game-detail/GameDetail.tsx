@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import {
   ArrowLeft,
   Star,
@@ -18,6 +19,11 @@ import {
   CheckCircle2,
   Sparkles,
   Flame,
+  HelpCircle,
+  BookOpen,
+  Percent,
+  X,
+  Banknote,
 } from "lucide-react";
 import Link from "next/link";
 import { Game, getRelatedGames, getExpansionNames, getGamesByCategory } from "@/data/games";
@@ -57,6 +63,133 @@ function StatBadge({
       <span className="text-white font-raleway font-semibold text-sm">{value}</span>
       <span className="text-white/40 text-xs font-inter">{label}</span>
     </div>
+  );
+}
+
+function RentalBadge({ game }: { game: Game }) {
+  const [showInfo, setShowInfo] = useState(false);
+  const rentalPrice = Math.round(game.priceNumber * 0.1);
+  const isRented = game.rental?.currentlyRented;
+
+  return (
+    <>
+      <div className="border-t border-white/5 pt-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <BookOpen size={16} className="text-purple-400" />
+            <span className="text-white/60 text-sm font-inter">
+              Alquilar por 1 semana
+            </span>
+            <button
+              onClick={() => setShowInfo(true)}
+              className="text-white/30 hover:text-gold transition-colors"
+              aria-label="Info sobre alquiler"
+            >
+              <HelpCircle size={14} />
+            </button>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="font-cinzel text-purple-300 text-lg font-bold">
+              ${rentalPrice.toLocaleString("es-AR")}
+            </span>
+            {isRented ? (
+              <span className="text-orange-400/80 text-xs font-inter bg-orange-500/10 border border-orange-500/20 px-2 py-1 rounded-full">
+                Alquilado
+              </span>
+            ) : (
+              <a
+                href={`https://wa.me/5493425064651?text=Hola! Quiero alquilar ${game.name}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-raleway font-semibold bg-purple-500/10 border border-purple-500/30 text-purple-300 px-3 py-1.5 rounded-lg hover:bg-purple-500/20 transition-colors"
+              >
+                Alquilar
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Rental Info Modal */}
+      <AnimatePresence>
+        {showInfo && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-dark/90 backdrop-blur-xl flex items-center justify-center p-4"
+            onClick={() => setShowInfo(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="bg-dark-card border border-white/10 rounded-2xl p-6 md:p-8 max-w-lg w-full relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setShowInfo(false)}
+                className="absolute top-4 right-4 text-white/30 hover:text-white transition-colors"
+              >
+                <X size={20} />
+              </button>
+
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center">
+                  <BookOpen size={20} className="text-purple-400" />
+                </div>
+                <h3 className="font-cinzel text-xl font-bold text-white">
+                  Alquiler de juegos
+                </h3>
+              </div>
+
+              <div className="space-y-4 text-sm font-inter">
+                <div className="space-y-3">
+                  {[
+                    { step: "1", text: "Elegí los juegos que querés entre los disponibles" },
+                    { step: "2", text: "Podés alquilar hasta 3 juegos por vez" },
+                    { step: "3", text: "Retiralos por el showroom" },
+                    { step: "4", text: "Disfrutalos por 5 o 10 días" },
+                    { step: "5", text: "Devolvelos en el showroom" },
+                  ].map((item) => (
+                    <div key={item.step} className="flex items-start gap-3">
+                      <span className="w-6 h-6 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center text-gold text-xs font-bold shrink-0">
+                        {item.step}
+                      </span>
+                      <span className="text-white/60 pt-0.5">{item.text}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="bg-emerald-500/5 border border-emerald-500/15 rounded-lg p-3">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Percent size={14} className="text-emerald-400" />
+                    <span className="text-emerald-400 font-semibold text-xs">Beneficio</span>
+                  </div>
+                  <p className="text-white/50 text-xs">
+                    10% de descuento en la compra del juego nuevo si antes lo alquilaste. Sin vencimiento.
+                  </p>
+                </div>
+
+                <p className="text-white/30 text-xs">
+                  Beneficio exclusivo para clientes de Santa Fe y alrededores.
+                </p>
+
+                <a
+                  href="https://ludigema.com.ar/como-alquilar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-gold/70 hover:text-gold text-xs transition-colors"
+                >
+                  Ver toda la info en Ludigema
+                  <ExternalLink size={10} />
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
@@ -205,7 +338,7 @@ export default function GameDetail({ game }: { game: Game }) {
 
             {/* Price & CTA */}
             <div className="mt-auto bg-dark-card/60 border border-white/5 rounded-2xl p-6">
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-2">
                 <div>
                   <span className="font-cinzel text-gold text-3xl md:text-4xl font-bold">
                     {game.price}
@@ -226,7 +359,20 @@ export default function GameDetail({ game }: { game: Game }) {
                 )}
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3">
+              {/* Transfer discount */}
+              {game.transferDiscount && (
+                <div className="flex items-center gap-2 mb-4 bg-emerald-500/5 border border-emerald-500/15 rounded-lg px-3 py-2">
+                  <Banknote size={14} className="text-emerald-400 shrink-0" />
+                  <span className="text-emerald-400/80 text-xs font-inter">
+                    <span className="font-semibold">10% OFF</span> pagando con transferencia bancaria —{" "}
+                    <span className="text-emerald-300 font-semibold">
+                      ${Math.round(game.priceNumber * 0.9).toLocaleString("es-AR")}
+                    </span>
+                  </span>
+                </div>
+              )}
+
+              <div className="flex flex-col sm:flex-row gap-3 mb-3">
                 <a
                   href="https://estratagema.com.ar"
                   target="_blank"
@@ -245,6 +391,11 @@ export default function GameDetail({ game }: { game: Game }) {
                   Consultar por WhatsApp
                 </a>
               </div>
+
+              {/* Rental section */}
+              {game.rental?.available && (
+                <RentalBadge game={game} />
+              )}
             </div>
           </motion.div>
         </div>

@@ -31,6 +31,11 @@ export interface Game {
   inStock: boolean;
   isNew?: boolean;
   isBestseller?: boolean;
+  rental?: {
+    available: boolean; // can this game be rented at all?
+    currentlyRented: boolean; // is it currently rented out?
+  };
+  transferDiscount?: boolean; // 10% off with bank transfer
 }
 
 export const games: Game[] = [
@@ -85,6 +90,8 @@ Perfecto como puerta de entrada al mundo de los juegos de mesa modernos, Catán 
     relatedSlugs: ["ticket-to-ride", "splendor"],
     inStock: true,
     isBestseller: true,
+    rental: { available: true, currentlyRented: false },
+    transferDiscount: true,
   },
   {
     slug: "ticket-to-ride",
@@ -135,6 +142,8 @@ Con reglas que se explican en 15 minutos y partidas que duran alrededor de una h
     relatedSlugs: ["catan", "splendor", "dixit"],
     inStock: true,
     isBestseller: true,
+    rental: { available: true, currentlyRented: true },
+    transferDiscount: true,
   },
   {
     slug: "pandemic",
@@ -186,6 +195,8 @@ Pandemic es una experiencia cooperativa por excelencia. Los debates sobre la mej
     expansions: ["pandemic-al-limite", "pandemic-estado-de-emergencia"],
     relatedSlugs: ["terraforming-mars", "catan"],
     inStock: true,
+    rental: { available: true, currentlyRented: false },
+    transferDiscount: true,
   },
   {
     slug: "terraforming-mars",
@@ -238,6 +249,8 @@ El juego combina gestión de recursos profunda con una temática científica fas
     relatedSlugs: ["pandemic", "splendor"],
     inStock: true,
     isNew: true,
+    rental: { available: false, currentlyRented: false },
+    transferDiscount: true,
   },
   {
     slug: "dixit",
@@ -287,6 +300,8 @@ Con arte que parece sacado de un sueño, Dixit es mucho más que un juego — es
     ],
     relatedSlugs: ["ticket-to-ride", "catan"],
     inStock: true,
+    rental: { available: true, currentlyRented: false },
+    transferDiscount: true,
   },
   {
     slug: "splendor",
@@ -337,6 +352,8 @@ Con partidas de 30 minutos y una curva de aprendizaje de apenas 5 minutos, Splen
     relatedSlugs: ["catan", "ticket-to-ride", "terraforming-mars"],
     inStock: true,
     isBestseller: true,
+    rental: { available: true, currentlyRented: true },
+    transferDiscount: true,
   },
 ];
 

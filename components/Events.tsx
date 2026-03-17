@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Swords, Layers, Trophy, ArrowRight, CalendarDays } from "lucide-react";
+import { Swords, Layers, Trophy, ArrowRight, CalendarDays, MapPin } from "lucide-react";
 
 const events = [
   {
@@ -12,6 +12,8 @@ const events = [
     status: "Confirmado",
     icon: Swords,
     time: "19:00 hs",
+    location: "Lisandro Café",
+    address: "Lisandro de la Torre 2450, Santa Fe",
   },
   {
     date: "05",
@@ -21,6 +23,8 @@ const events = [
     status: "Confirmado",
     icon: Layers,
     time: "18:00 hs",
+    location: "Showroom Estratagema",
+    address: "4 de Enero 2520, Santa Fe",
   },
   {
     date: "19",
@@ -30,6 +34,8 @@ const events = [
     status: "Próximamente",
     icon: Trophy,
     time: "17:00 hs",
+    location: "Lisandro Café",
+    address: "Lisandro de la Torre 2450, Santa Fe",
   },
 ];
 
@@ -108,9 +114,22 @@ export default function Events() {
                 </div>
 
                 {/* Description */}
-                <p className="text-gray-text text-sm font-inter leading-relaxed mb-5">
+                <p className="text-gray-text text-sm font-inter leading-relaxed mb-4">
                   {event.description}
                 </p>
+
+                {/* Location */}
+                <div className="flex items-start gap-2 mb-5 bg-white/[0.02] rounded-lg px-3 py-2.5 border border-white/5">
+                  <MapPin size={14} className="text-gold/60 mt-0.5 shrink-0" />
+                  <div>
+                    <span className="text-white/70 text-sm font-raleway font-semibold block">
+                      {event.location}
+                    </span>
+                    <span className="text-white/30 text-xs font-inter">
+                      {event.address}
+                    </span>
+                  </div>
+                </div>
 
                 {/* Footer */}
                 <div className="flex items-center justify-between">
