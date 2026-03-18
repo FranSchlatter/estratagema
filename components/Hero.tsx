@@ -183,11 +183,11 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-8 left-0 right-0 flex flex-col items-center gap-2"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       >
-        <span className="text-white/20 text-[10px] font-inter tracking-[0.3em] uppercase">Scroll</span>
+        <span className="text-white/20 text-[10px] font-inter tracking-widest uppercase">Scroll</span>
         <ChevronDown className="text-gold/40" size={20} />
       </motion.div>
 
