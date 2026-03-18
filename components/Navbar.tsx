@@ -3,13 +3,14 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ShoppingCart } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 const navLinks = [
-  { label: "Juegos", href: "#juegos" },
-  { label: "Eventos", href: "#eventos" },
-  { label: "Café Lúdico", href: "#" },
-  { label: "Contacto", href: "#contacto" },
+  { label: "Juegos", href: "/#juegos" },
+  { label: "Eventos", href: "/#eventos" },
+  { label: "Nosotros", href: "/nosotros" },
+  { label: "Contacto", href: "/#contacto" },
 ];
 
 export default function Navbar() {
@@ -33,7 +34,14 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[60px] md:h-[70px]">
           {/* Logo */}
-          <Link href="/" className="group flex items-center gap-2">
+          <Link href="/" className="group flex items-center gap-2.5">
+            <Image
+              src="/images/logo.png"
+              alt="Estratagema logo"
+              width={32}
+              height={32}
+              className="group-hover:scale-110 transition-transform duration-300"
+            />
             <span className="font-cinzel text-gold text-xl md:text-2xl font-bold tracking-[0.15em] group-hover:text-yellow-300 transition-colors duration-300">
               ESTRATAGEMA
             </span>
@@ -42,14 +50,14 @@ export default function Navbar() {
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 className="relative text-white/60 hover:text-white transition-colors duration-300 font-raleway text-sm tracking-wide group"
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold group-hover:w-full transition-all duration-300" />
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -87,17 +95,20 @@ export default function Navbar() {
           >
             <div className="px-4 py-6 flex flex-col gap-1">
               {navLinks.map((link, i) => (
-                <motion.a
+                <Link
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                  className="text-white/70 hover:text-gold transition-colors font-raleway text-lg py-3 px-4 rounded-lg hover:bg-white/5"
                 >
-                  {link.label}
-                </motion.a>
+                  <motion.span
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                    className="block text-white/70 hover:text-gold transition-colors font-raleway text-lg py-3 px-4 rounded-lg hover:bg-white/5"
+                  >
+                    {link.label}
+                  </motion.span>
+                </Link>
               ))}
               <div className="mt-4 px-4">
                 <a

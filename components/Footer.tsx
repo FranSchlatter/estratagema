@@ -5,7 +5,7 @@ import { Instagram, Facebook, MessageCircle, MapPin, Clock, Mail, ExternalLink }
 const quickLinks = [
   { label: "Juegos", href: "#juegos" },
   { label: "Eventos", href: "#eventos" },
-  { label: "Nosotros", href: "#nosotros" },
+  { label: "Nosotros", href: "/nosotros" },
   { label: "Contacto", href: "#contacto" },
 ];
 

@@ -32,18 +32,20 @@ import RelatedGames from "./RelatedGames";
 
 function ComplexityBar({ level }: { level: number }) {
   return (
-    <div className="flex items-center gap-1">
-      {[1, 2, 3, 4, 5].map((i) => (
-        <div
-          key={i}
-          className={`h-2 w-6 rounded-full transition-colors ${
-            i <= Math.round(level)
-              ? "bg-gold"
-              : "bg-white/10"
-          }`}
-        />
-      ))}
-      <span className="text-white/40 text-xs ml-2">{level.toFixed(1)}/5</span>
+    <div className="flex flex-col items-center gap-1.5 w-full">
+      <div className="flex items-center gap-1">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <div
+            key={i}
+            className={`h-2 w-5 rounded-full transition-colors ${
+              i <= Math.round(level)
+                ? "bg-gold"
+                : "bg-white/10"
+            }`}
+          />
+        ))}
+      </div>
+      <span className="text-white font-raleway font-semibold text-sm">{level.toFixed(1)}/5</span>
     </div>
   );
 }
@@ -78,7 +80,7 @@ function RentalBadge({ game }: { game: Game }) {
           <div className="flex items-center gap-2">
             <BookOpen size={16} className="text-purple-400" />
             <span className="text-white/60 text-sm font-inter">
-              Alquilar por 1 semana
+              Alquilar por 10 días
             </span>
             <button
               onClick={() => setShowInfo(true)}
@@ -327,7 +329,7 @@ export default function GameDetail({ game }: { game: Game }) {
               <StatBadge icon={Users} label="Jugadores" value={game.players} />
               <StatBadge icon={Clock} label="Duración" value={game.playTime} />
               <StatBadge icon={Baby} label="Edad" value={game.age} />
-              <div className="bg-dark-card/80 border border-white/5 rounded-xl p-4 flex flex-col items-center gap-2 text-center">
+              <div className="bg-dark-card/80 border border-white/5 rounded-xl p-4 flex flex-col items-center gap-2 text-center overflow-hidden">
                 <BarChart3 size={20} className="text-gold" />
                 <ComplexityBar level={game.complexity} />
                 <span className="text-white/40 text-xs font-inter">

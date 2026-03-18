@@ -6,15 +6,16 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export function generateStaticParams() {
   return games.map((game) => ({ slug: game.slug }));
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const game = getGameBySlug(params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const game = getGameBySlug(slug);
   if (!game) return { title: "Juego no encontrado" };
 
   return {
@@ -28,8 +29,9 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function GamePage({ params }: Props) {
-  const game = getGameBySlug(params.slug);
+export default async function GamePage({ params }: Props) {
+  const { slug } = await params;
+  const game = getGameBySlug(slug);
   if (!game) notFound();
 
   return (
